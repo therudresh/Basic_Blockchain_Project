@@ -15,6 +15,10 @@ contract Election {
 	
 	uint public candidatesCount;
 	
+	event votedEvent(
+		uint indexed _candidateId
+	);
+	
 	function Election () public {
 		//candidate = "Rudresh";
 		addCandidate("Rudresh Trivedi");
@@ -31,5 +35,7 @@ contract Election {
 		require(_candidateID > 0 && _candidateID <= candidatesCount);
 		voters[msg.sender] = true;
 		candidates[_candidateID].voteCount++;
+		
+		votedEvent(_candidateID);
 	}
 }
